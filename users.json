@@ -1,0 +1,19 @@
+{
+  "jwt@atko.email": {
+    "subject": "jwt@atko.email",
+    "roles": ["admin", "user", "member"]
+  },
+  "00u54o5dv7JM8CVzE697": {
+    "subject": "00u54o5dv7JM8CVzE697",
+    "roles": ["admin", "user", "member"]
+  },
+  "user2@example.com": {
+    "subject": "user2@example.com",
+    "roles": ["user"]
+  },
+  "00u1234567890abcdef": {
+    "subject": "00u1234567890abcdef",
+    "roles": ["admin", "manager", "user"]
+  }
+}
+
