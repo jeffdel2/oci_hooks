@@ -96,27 +96,18 @@ function processTokenHook(hookData) {
 
   console.log(`User ID: ${subjectInfo.id}, Login: ${subjectInfo.login}, Roles:`, roles);
 
-  // Deep clone the data to avoid mutating the original
-  const modifiedData = JSON.parse(JSON.stringify(data));
-
-  // Add roles to access token claims if they exist
-  if (modifiedData.access && modifiedData.access.claims) {
-    modifiedData.access.claims.roles = roles;
-    modifiedData.access.claims.roles_string = roles.join(' ');
-  }
-
-  // Add roles to identity token claims if they exist
-  if (modifiedData.identity && modifiedData.identity.claims) {
-    modifiedData.identity.claims.roles = roles;
-    modifiedData.identity.claims.roles_string = roles.join(' ');
-  }
-
-  // Build the response to Okta
+  // Build the response to Okta - add ext_roles to access token only
   const response = {
     commands: [
       {
         type: 'com.okta.access.patch',
-        value: modifiedData
+        value: [
+          {
+            op: 'add',
+            path: '/claims/ext_roles',
+            value: roles
+          }
+        ]
       }
     ]
   };
