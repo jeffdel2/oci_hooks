@@ -111,8 +111,8 @@ function processTokenHook(hookData) {
     modifiedData.identity.claims.roles_string = roles.join(' ');
   }
 
-  // Return the modified token data
-  return {
+  // Build the response to Okta
+  const response = {
     commands: [
       {
         type: 'com.okta.access.patch',
@@ -120,6 +120,11 @@ function processTokenHook(hookData) {
       }
     ]
   };
+
+  // Log the response being sent back to Okta
+  console.log('Response to Okta:', JSON.stringify(response, null, 2));
+
+  return response;
 }
 
 module.exports = {
